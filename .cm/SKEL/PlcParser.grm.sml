@@ -1,0 +1,2 @@
+Skeleton 5
+ae"PlcParserLrValsFun"i2aä¢Token"gp1c"TOKEN"f±ÿjh2aä¢ParserData"h7aä¢Header"è0aä¢LrTable"gp2ÿÿCaÿgpÿ-båçð±ÿf6d"List"Cd"Array"d"Char"ÿd"String"d"General"Nbåçð±ÿaä¢MlyValue"ÿad"EC"h2ÿ+bÿ‚#æ±ÿ‚+ad"Actions"h2bÿ‚#f3ÿÿ‚+d"Int"ÿƒNaä¢Tokens"jÿçð±ã¢PlcParser_TOKENS"h2aÿ4gp1c"PARSER_DATA"aÿƒ1ÿƒ>

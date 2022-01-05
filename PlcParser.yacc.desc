@@ -1,0 +1,2846 @@
+
+state 0:
+
+	Start : . Prog 
+
+	NUM	shift 26
+	ID	shift 25
+	VAR	shift 24
+	FUN	shift 23
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Start	goto 145
+	Prog	goto 9
+	Decl	goto 8
+	Expr_multipla	goto 7
+	Expr_simples	goto 6
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 1:
+
+	Const : Num .  (reduce by rule 56)
+
+
+
+	.	reduce by rule 56
+
+
+state 2:
+
+	Atomic_expr : Id .  (reduce by rule 45)
+
+
+
+	.	reduce by rule 45
+
+
+state 3:
+
+	Atomic_expr : Const .  (reduce by rule 44)
+
+
+
+	.	reduce by rule 44
+
+
+state 4:
+
+	Expr_simples : App_expr .  (reduce by rule 9)
+	App_expr : App_expr . Atomic_expr 
+
+	NUM	shift 26
+	ID	shift 25
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Atomic_expr	goto 27
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	reduce by rule 9
+
+
+state 5:
+
+	Expr_simples : Atomic_expr .  (reduce by rule 8)
+	App_expr : Atomic_expr . Atomic_expr 
+
+	NUM	shift 26
+	ID	shift 25
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Atomic_expr	goto 28
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	reduce by rule 8
+
+
+state 6:
+
+	Expr_multipla : Expr_simples . PONTO_VIRGULA Expr_multipla 
+	Expr_multipla : Expr_simples .  (reduce by rule 7)
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	PONTO_VIRGULA	shift 40
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 7
+
+
+state 7:
+
+	Prog : Expr_multipla .  (reduce by rule 2)
+
+
+
+	.	reduce by rule 2
+
+
+state 8:
+
+	Prog : Decl .  (reduce by rule 1)
+
+
+
+	.	reduce by rule 1
+
+
+state 9:
+
+	Start : Prog .  (reduce by rule 0)
+
+
+
+	.	reduce by rule 0
+
+
+state 10:
+
+	Atomic_expr : ABRE_CHAVE . Prog FECHA_CHAVE 
+
+	NUM	shift 26
+	ID	shift 25
+	VAR	shift 24
+	FUN	shift 23
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Prog	goto 41
+	Decl	goto 8
+	Expr_multipla	goto 7
+	Expr_simples	goto 6
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 11:
+
+	Atomic_expr : ABRE_PARENTESES . Expr_simples FECHA_PARENTESES 
+	Atomic_expr : ABRE_PARENTESES . Comps FECHA_PARENTESES 
+	Const : ABRE_PARENTESES . FECHA_PARENTESES 
+	Const : ABRE_PARENTESES . Type ABRE_COLCHETE FECHA_COLCHETE FECHA_PARENTESES 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	NIL	shift 51
+	BOOL	shift 50
+	INT	shift 49
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_COLCHETE	shift 48
+	ABRE_PARENTESES	shift 47
+	FECHA_PARENTESES	shift 46
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 45
+	Type	goto 44
+	Atomic_type	goto 43
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Comps	goto 42
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 12:
+
+	Expr_simples : MENOS . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 52
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 13:
+
+	Expr_simples : EXCLAMACAO . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 53
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 14:
+
+	Const : FALSE .  (reduce by rule 55)
+
+
+
+	.	reduce by rule 55
+
+
+state 15:
+
+	Const : TRUE .  (reduce by rule 54)
+
+
+
+	.	reduce by rule 54
+
+
+state 16:
+
+	Atomic_expr : FN . Args IGUAL MAIOR Expr_simples END 
+
+	ABRE_PARENTESES	shift 55
+
+	Args	goto 54
+
+	.	error
+
+
+state 17:
+
+	Expr_simples : PRINT . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 56
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 18:
+
+	Expr_simples : ISE . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 57
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 19:
+
+	Expr_simples : TL . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 58
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 20:
+
+	Expr_simples : HD . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 59
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 21:
+
+	Expr_simples : MATCH . Expr_simples WITH Match_expr 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 60
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 22:
+
+	Expr_simples : IF . Expr_simples THEN Expr_simples ELSE Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 61
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 23:
+
+	Decl : FUN . Id Args IGUAL Expr_simples PONTO_VIRGULA Prog 
+	Decl : FUN . REC Id Args DOIS_PONTOS Type IGUAL Expr_simples PONTO_VIRGULA Prog 
+
+	ID	shift 25
+	REC	shift 63
+
+	Id	goto 62
+
+	.	error
+
+
+state 24:
+
+	Decl : VAR . Id IGUAL Expr_simples PONTO_VIRGULA Prog 
+
+	ID	shift 25
+
+	Id	goto 64
+
+	.	error
+
+
+state 25:
+
+	Id : ID .  (reduce by rule 63)
+
+
+
+	.	reduce by rule 63
+
+
+state 26:
+
+	Num : NUM .  (reduce by rule 62)
+
+
+
+	.	reduce by rule 62
+
+
+state 27:
+
+	App_expr : App_expr Atomic_expr .  (reduce by rule 53)
+
+
+
+	.	reduce by rule 53
+
+
+state 28:
+
+	App_expr : Atomic_expr Atomic_expr .  (reduce by rule 52)
+
+
+
+	.	reduce by rule 52
+
+
+state 29:
+
+	Expr_simples : Expr_simples ABRE_COLCHETE . Num FECHA_COLCHETE 
+
+	NUM	shift 26
+
+	Num	goto 65
+
+	.	error
+
+
+state 30:
+
+	Expr_simples : Expr_simples MENOR_IGUAL . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 66
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 31:
+
+	Expr_simples : Expr_simples MENOR . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 67
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 32:
+
+	Expr_simples : Expr_simples DIVIDIDO . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 68
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 33:
+
+	Expr_simples : Expr_simples VEZES . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 69
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 34:
+
+	Expr_simples : Expr_simples MAIS . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 70
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 35:
+
+	Expr_simples : Expr_simples DUPLO_E_COMERCIAL . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 71
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 36:
+
+	Expr_simples : Expr_simples MENOS . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 72
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 37:
+
+	Expr_simples : Expr_simples DUPLO_DOIS_PONTOS . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 73
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 38:
+
+	Expr_simples : Expr_simples DIFERENTE . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 74
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 39:
+
+	Expr_simples : Expr_simples IGUAL . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 75
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 40:
+
+	Expr_multipla : Expr_simples PONTO_VIRGULA . Expr_multipla 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_multipla	goto 76
+	Expr_simples	goto 6
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 41:
+
+	Atomic_expr : ABRE_CHAVE Prog . FECHA_CHAVE 
+
+	FECHA_CHAVE	shift 77
+
+
+	.	error
+
+
+state 42:
+
+	Atomic_expr : ABRE_PARENTESES Comps . FECHA_PARENTESES 
+
+	FECHA_PARENTESES	shift 78
+
+
+	.	error
+
+
+state 43:
+
+	Type : Atomic_type .  (reduce by rule 34)
+
+
+
+	.	reduce by rule 34
+
+
+state 44:
+
+	Type : Type . MENOS_MAIOR Type 
+	Const : ABRE_PARENTESES Type . ABRE_COLCHETE FECHA_COLCHETE FECHA_PARENTESES 
+
+	MENOS_MAIOR	shift 80
+	ABRE_COLCHETE	shift 79
+
+
+	.	error
+
+
+state 45:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+	Atomic_expr : ABRE_PARENTESES Expr_simples . FECHA_PARENTESES 
+	Comps : Expr_simples . VIRGULA Expr_simples 
+	Comps : Expr_simples . VIRGULA Comps 
+
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+	FECHA_PARENTESES	shift 82
+	VIRGULA	shift 81
+
+
+	.	error
+
+
+state 46:
+
+	Const : ABRE_PARENTESES FECHA_PARENTESES .  (reduce by rule 57)
+
+
+
+	.	reduce by rule 57
+
+
+state 47:
+
+	Type : ABRE_PARENTESES . Types FECHA_PARENTESES 
+	Atomic_type : ABRE_PARENTESES . Type FECHA_PARENTESES 
+	Atomic_expr : ABRE_PARENTESES . Expr_simples FECHA_PARENTESES 
+	Atomic_expr : ABRE_PARENTESES . Comps FECHA_PARENTESES 
+	Const : ABRE_PARENTESES . FECHA_PARENTESES 
+	Const : ABRE_PARENTESES . Type ABRE_COLCHETE FECHA_COLCHETE FECHA_PARENTESES 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	NIL	shift 51
+	BOOL	shift 50
+	INT	shift 49
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_COLCHETE	shift 48
+	ABRE_PARENTESES	shift 47
+	FECHA_PARENTESES	shift 46
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 45
+	Type	goto 84
+	Atomic_type	goto 43
+	Types	goto 83
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Comps	goto 42
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 48:
+
+	Type : ABRE_COLCHETE . Type FECHA_COLCHETE 
+
+	NIL	shift 51
+	BOOL	shift 50
+	INT	shift 49
+	ABRE_COLCHETE	shift 48
+	ABRE_PARENTESES	shift 86
+
+	Type	goto 85
+	Atomic_type	goto 43
+
+	.	error
+
+
+state 49:
+
+	Atomic_type : INT .  (reduce by rule 40)
+
+
+
+	.	reduce by rule 40
+
+
+state 50:
+
+	Atomic_type : BOOL .  (reduce by rule 39)
+
+
+
+	.	reduce by rule 39
+
+
+state 51:
+
+	Atomic_type : NIL .  (reduce by rule 38)
+
+
+
+	.	reduce by rule 38
+
+
+state 52:
+
+	Expr_simples : MENOS Expr_simples .  (reduce by rule 13)
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 13
+
+
+state 53:
+
+	Expr_simples : EXCLAMACAO Expr_simples .  (reduce by rule 12)
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 12
+
+
+state 54:
+
+	Atomic_expr : FN Args . IGUAL MAIOR Expr_simples END 
+
+	IGUAL	shift 87
+
+
+	.	error
+
+
+state 55:
+
+	Args : ABRE_PARENTESES . FECHA_PARENTESES 
+	Args : ABRE_PARENTESES . Params FECHA_PARENTESES 
+
+	NIL	shift 51
+	BOOL	shift 50
+	INT	shift 49
+	ABRE_COLCHETE	shift 48
+	ABRE_PARENTESES	shift 86
+	FECHA_PARENTESES	shift 91
+
+	Params	goto 90
+	Typed_var	goto 89
+	Type	goto 88
+	Atomic_type	goto 43
+
+	.	error
+
+
+state 56:
+
+	Expr_simples : PRINT Expr_simples .  (reduce by rule 17)
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 17
+
+
+state 57:
+
+	Expr_simples : ISE Expr_simples .  (reduce by rule 16)
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 16
+
+
+state 58:
+
+	Expr_simples : TL Expr_simples .  (reduce by rule 15)
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 15
+
+
+state 59:
+
+	Expr_simples : HD Expr_simples .  (reduce by rule 14)
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 14
+
+
+state 60:
+
+	Expr_simples : MATCH Expr_simples . WITH Match_expr 
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	WITH	shift 92
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	error
+
+
+state 61:
+
+	Expr_simples : IF Expr_simples . THEN Expr_simples ELSE Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	THEN	shift 93
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	error
+
+
+state 62:
+
+	Decl : FUN Id . Args IGUAL Expr_simples PONTO_VIRGULA Prog 
+
+	ABRE_PARENTESES	shift 55
+
+	Args	goto 94
+
+	.	error
+
+
+state 63:
+
+	Decl : FUN REC . Id Args DOIS_PONTOS Type IGUAL Expr_simples PONTO_VIRGULA Prog 
+
+	ID	shift 25
+
+	Id	goto 95
+
+	.	error
+
+
+state 64:
+
+	Decl : VAR Id . IGUAL Expr_simples PONTO_VIRGULA Prog 
+
+	IGUAL	shift 96
+
+
+	.	error
+
+
+state 65:
+
+	Expr_simples : Expr_simples ABRE_COLCHETE Num . FECHA_COLCHETE 
+
+	FECHA_COLCHETE	shift 97
+
+
+	.	error
+
+
+state 66:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples MENOR_IGUAL Expr_simples .  (reduce by rule 26)
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 26
+
+
+state 67:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples MENOR Expr_simples .  (reduce by rule 25)
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 25
+
+
+state 68:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples DIVIDIDO Expr_simples .  (reduce by rule 22)
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 22
+
+
+state 69:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples VEZES Expr_simples .  (reduce by rule 21)
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 21
+
+
+state 70:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples MAIS Expr_simples .  (reduce by rule 19)
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 19
+
+
+state 71:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples DUPLO_E_COMERCIAL Expr_simples .  (reduce by rule 18)
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 18
+
+
+state 72:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples MENOS Expr_simples .  (reduce by rule 20)
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 20
+
+
+state 73:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples DUPLO_DOIS_PONTOS Expr_simples .  (reduce by rule 27)
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 27
+
+
+state 74:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples DIFERENTE Expr_simples .  (reduce by rule 24)
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 24
+
+
+state 75:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples IGUAL Expr_simples .  (reduce by rule 23)
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 23
+
+
+state 76:
+
+	Expr_multipla : Expr_simples PONTO_VIRGULA Expr_multipla .  (reduce by rule 6)
+
+
+
+	.	reduce by rule 6
+
+
+state 77:
+
+	Atomic_expr : ABRE_CHAVE Prog FECHA_CHAVE .  (reduce by rule 46)
+
+
+
+	.	reduce by rule 46
+
+
+state 78:
+
+	Atomic_expr : ABRE_PARENTESES Comps FECHA_PARENTESES .  (reduce by rule 48)
+
+
+
+	.	reduce by rule 48
+
+
+state 79:
+
+	Const : ABRE_PARENTESES Type ABRE_COLCHETE . FECHA_COLCHETE FECHA_PARENTESES 
+
+	FECHA_COLCHETE	shift 98
+
+
+	.	error
+
+
+state 80:
+
+	Type : Type MENOS_MAIOR . Type 
+
+	NIL	shift 51
+	BOOL	shift 50
+	INT	shift 49
+	ABRE_COLCHETE	shift 48
+	ABRE_PARENTESES	shift 86
+
+	Type	goto 99
+	Atomic_type	goto 43
+
+	.	error
+
+
+state 81:
+
+	Comps : Expr_simples VIRGULA . Expr_simples 
+	Comps : Expr_simples VIRGULA . Comps 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 101
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Comps	goto 100
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 82:
+
+	Atomic_expr : ABRE_PARENTESES Expr_simples FECHA_PARENTESES .  (reduce by rule 47)
+
+
+
+	.	reduce by rule 47
+
+
+state 83:
+
+	Type : ABRE_PARENTESES Types . FECHA_PARENTESES 
+
+	FECHA_PARENTESES	shift 102
+
+
+	.	error
+
+
+state 84:
+
+	Type : Type . MENOS_MAIOR Type 
+	Atomic_type : ABRE_PARENTESES Type . FECHA_PARENTESES 
+	Types : Type . VIRGULA Type 
+	Types : Type . VIRGULA Types 
+	Const : ABRE_PARENTESES Type . ABRE_COLCHETE FECHA_COLCHETE FECHA_PARENTESES 
+
+	MENOS_MAIOR	shift 80
+	ABRE_COLCHETE	shift 79
+	FECHA_PARENTESES	shift 104
+	VIRGULA	shift 103
+
+
+	.	error
+
+
+state 85:
+
+	Type : ABRE_COLCHETE Type . FECHA_COLCHETE 
+	Type : Type . MENOS_MAIOR Type 
+
+	MENOS_MAIOR	shift 80
+	FECHA_COLCHETE	shift 105
+
+
+	.	error
+
+
+state 86:
+
+	Type : ABRE_PARENTESES . Types FECHA_PARENTESES 
+	Atomic_type : ABRE_PARENTESES . Type FECHA_PARENTESES 
+
+	NIL	shift 51
+	BOOL	shift 50
+	INT	shift 49
+	ABRE_COLCHETE	shift 48
+	ABRE_PARENTESES	shift 86
+
+	Type	goto 106
+	Atomic_type	goto 43
+	Types	goto 83
+
+	.	error
+
+
+state 87:
+
+	Atomic_expr : FN Args IGUAL . MAIOR Expr_simples END 
+
+	MAIOR	shift 107
+
+
+	.	error
+
+
+state 88:
+
+	Typed_var : Type . Id 
+	Type : Type . MENOS_MAIOR Type 
+
+	ID	shift 25
+	MENOS_MAIOR	shift 80
+
+	Id	goto 108
+
+	.	error
+
+
+state 89:
+
+	Params : Typed_var .  (reduce by rule 31)
+	Params : Typed_var . VIRGULA Params 
+
+	VIRGULA	shift 109
+
+
+	.	reduce by rule 31
+
+
+state 90:
+
+	Args : ABRE_PARENTESES Params . FECHA_PARENTESES 
+
+	FECHA_PARENTESES	shift 110
+
+
+	.	error
+
+
+state 91:
+
+	Args : ABRE_PARENTESES FECHA_PARENTESES .  (reduce by rule 29)
+
+
+
+	.	reduce by rule 29
+
+
+state 92:
+
+	Expr_simples : MATCH Expr_simples WITH . Match_expr 
+
+	END	shift 113
+	BARRA_VERTICAL	shift 112
+
+	Match_expr	goto 111
+
+	.	error
+
+
+state 93:
+
+	Expr_simples : IF Expr_simples THEN . Expr_simples ELSE Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 114
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 94:
+
+	Decl : FUN Id Args . IGUAL Expr_simples PONTO_VIRGULA Prog 
+
+	IGUAL	shift 115
+
+
+	.	error
+
+
+state 95:
+
+	Decl : FUN REC Id . Args DOIS_PONTOS Type IGUAL Expr_simples PONTO_VIRGULA Prog 
+
+	ABRE_PARENTESES	shift 55
+
+	Args	goto 116
+
+	.	error
+
+
+state 96:
+
+	Decl : VAR Id IGUAL . Expr_simples PONTO_VIRGULA Prog 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 117
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 97:
+
+	Expr_simples : Expr_simples ABRE_COLCHETE Num FECHA_COLCHETE .  (reduce by rule 28)
+
+
+
+	.	reduce by rule 28
+
+
+state 98:
+
+	Const : ABRE_PARENTESES Type ABRE_COLCHETE FECHA_COLCHETE . FECHA_PARENTESES 
+
+	FECHA_PARENTESES	shift 118
+
+
+	.	error
+
+
+state 99:
+
+	Type : Type . MENOS_MAIOR Type 
+	Type : Type MENOS_MAIOR Type .  (reduce by rule 37)
+
+	MENOS_MAIOR	shift 80
+
+
+	.	reduce by rule 37
+
+
+state 100:
+
+	Comps : Expr_simples VIRGULA Comps .  (reduce by rule 51)
+
+
+
+	.	reduce by rule 51
+
+
+state 101:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+	Comps : Expr_simples . VIRGULA Expr_simples 
+	Comps : Expr_simples VIRGULA Expr_simples .  (reduce by rule 50)
+	Comps : Expr_simples . VIRGULA Comps 
+
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+	VIRGULA	shift 81
+
+
+	.	reduce by rule 50
+
+
+state 102:
+
+	Type : ABRE_PARENTESES Types FECHA_PARENTESES .  (reduce by rule 35)
+
+
+
+	.	reduce by rule 35
+
+
+state 103:
+
+	Types : Type VIRGULA . Type 
+	Types : Type VIRGULA . Types 
+
+	NIL	shift 51
+	BOOL	shift 50
+	INT	shift 49
+	ABRE_COLCHETE	shift 48
+	ABRE_PARENTESES	shift 86
+
+	Type	goto 120
+	Atomic_type	goto 43
+	Types	goto 119
+
+	.	error
+
+
+state 104:
+
+	Atomic_type : ABRE_PARENTESES Type FECHA_PARENTESES .  (reduce by rule 41)
+
+
+
+	.	reduce by rule 41
+
+
+state 105:
+
+	Type : ABRE_COLCHETE Type FECHA_COLCHETE .  (reduce by rule 36)
+
+
+
+	.	reduce by rule 36
+
+
+state 106:
+
+	Type : Type . MENOS_MAIOR Type 
+	Atomic_type : ABRE_PARENTESES Type . FECHA_PARENTESES 
+	Types : Type . VIRGULA Type 
+	Types : Type . VIRGULA Types 
+
+	MENOS_MAIOR	shift 80
+	FECHA_PARENTESES	shift 104
+	VIRGULA	shift 103
+
+
+	.	error
+
+
+state 107:
+
+	Atomic_expr : FN Args IGUAL MAIOR . Expr_simples END 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 121
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 108:
+
+	Typed_var : Type Id .  (reduce by rule 33)
+
+
+
+	.	reduce by rule 33
+
+
+state 109:
+
+	Params : Typed_var VIRGULA . Params 
+
+	NIL	shift 51
+	BOOL	shift 50
+	INT	shift 49
+	ABRE_COLCHETE	shift 48
+	ABRE_PARENTESES	shift 86
+
+	Params	goto 122
+	Typed_var	goto 89
+	Type	goto 88
+	Atomic_type	goto 43
+
+	.	error
+
+
+state 110:
+
+	Args : ABRE_PARENTESES Params FECHA_PARENTESES .  (reduce by rule 30)
+
+
+
+	.	reduce by rule 30
+
+
+state 111:
+
+	Expr_simples : MATCH Expr_simples WITH Match_expr .  (reduce by rule 11)
+
+
+
+	.	reduce by rule 11
+
+
+state 112:
+
+	Match_expr : BARRA_VERTICAL . Expr_simples MENOS_MAIOR Expr_simples Match_expr 
+	Match_expr : BARRA_VERTICAL . UNDERLINE MENOS_MAIOR Expr_simples Match_expr 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+	UNDERLINE	shift 124
+
+	Expr_simples	goto 123
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 113:
+
+	Match_expr : END .  (reduce by rule 59)
+
+
+
+	.	reduce by rule 59
+
+
+state 114:
+
+	Expr_simples : IF Expr_simples THEN Expr_simples . ELSE Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	ELSE	shift 125
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	error
+
+
+state 115:
+
+	Decl : FUN Id Args IGUAL . Expr_simples PONTO_VIRGULA Prog 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 126
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 116:
+
+	Decl : FUN REC Id Args . DOIS_PONTOS Type IGUAL Expr_simples PONTO_VIRGULA Prog 
+
+	DOIS_PONTOS	shift 127
+
+
+	.	error
+
+
+state 117:
+
+	Decl : VAR Id IGUAL Expr_simples . PONTO_VIRGULA Prog 
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	PONTO_VIRGULA	shift 128
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	error
+
+
+state 118:
+
+	Const : ABRE_PARENTESES Type ABRE_COLCHETE FECHA_COLCHETE FECHA_PARENTESES .  (reduce by rule 58)
+
+
+
+	.	reduce by rule 58
+
+
+state 119:
+
+	Types : Type VIRGULA Types .  (reduce by rule 43)
+
+
+
+	.	reduce by rule 43
+
+
+state 120:
+
+	Type : Type . MENOS_MAIOR Type 
+	Types : Type . VIRGULA Type 
+	Types : Type VIRGULA Type .  (reduce by rule 42)
+	Types : Type . VIRGULA Types 
+
+	MENOS_MAIOR	shift 80
+	VIRGULA	shift 103
+
+
+	.	reduce by rule 42
+
+
+state 121:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+	Atomic_expr : FN Args IGUAL MAIOR Expr_simples . END 
+
+	END	shift 129
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	error
+
+
+state 122:
+
+	Params : Typed_var VIRGULA Params .  (reduce by rule 32)
+
+
+
+	.	reduce by rule 32
+
+
+state 123:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+	Match_expr : BARRA_VERTICAL Expr_simples . MENOS_MAIOR Expr_simples Match_expr 
+
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	MENOS_MAIOR	shift 130
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	error
+
+
+state 124:
+
+	Match_expr : BARRA_VERTICAL UNDERLINE . MENOS_MAIOR Expr_simples Match_expr 
+
+	MENOS_MAIOR	shift 131
+
+
+	.	error
+
+
+state 125:
+
+	Expr_simples : IF Expr_simples THEN Expr_simples ELSE . Expr_simples 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 132
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 126:
+
+	Decl : FUN Id Args IGUAL Expr_simples . PONTO_VIRGULA Prog 
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	PONTO_VIRGULA	shift 133
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	error
+
+
+state 127:
+
+	Decl : FUN REC Id Args DOIS_PONTOS . Type IGUAL Expr_simples PONTO_VIRGULA Prog 
+
+	NIL	shift 51
+	BOOL	shift 50
+	INT	shift 49
+	ABRE_COLCHETE	shift 48
+	ABRE_PARENTESES	shift 86
+
+	Type	goto 134
+	Atomic_type	goto 43
+
+	.	error
+
+
+state 128:
+
+	Decl : VAR Id IGUAL Expr_simples PONTO_VIRGULA . Prog 
+
+	NUM	shift 26
+	ID	shift 25
+	VAR	shift 24
+	FUN	shift 23
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Prog	goto 135
+	Decl	goto 8
+	Expr_multipla	goto 7
+	Expr_simples	goto 6
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 129:
+
+	Atomic_expr : FN Args IGUAL MAIOR Expr_simples END .  (reduce by rule 49)
+
+
+
+	.	reduce by rule 49
+
+
+state 130:
+
+	Match_expr : BARRA_VERTICAL Expr_simples MENOS_MAIOR . Expr_simples Match_expr 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 136
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 131:
+
+	Match_expr : BARRA_VERTICAL UNDERLINE MENOS_MAIOR . Expr_simples Match_expr 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 137
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 132:
+
+	Expr_simples : IF Expr_simples THEN Expr_simples ELSE Expr_simples .  (reduce by rule 10)
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	reduce by rule 10
+
+
+state 133:
+
+	Decl : FUN Id Args IGUAL Expr_simples PONTO_VIRGULA . Prog 
+
+	NUM	shift 26
+	ID	shift 25
+	VAR	shift 24
+	FUN	shift 23
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Prog	goto 138
+	Decl	goto 8
+	Expr_multipla	goto 7
+	Expr_simples	goto 6
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 134:
+
+	Decl : FUN REC Id Args DOIS_PONTOS Type . IGUAL Expr_simples PONTO_VIRGULA Prog 
+	Type : Type . MENOS_MAIOR Type 
+
+	IGUAL	shift 139
+	MENOS_MAIOR	shift 80
+
+
+	.	error
+
+
+state 135:
+
+	Decl : VAR Id IGUAL Expr_simples PONTO_VIRGULA Prog .  (reduce by rule 3)
+
+
+
+	.	reduce by rule 3
+
+
+state 136:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+	Match_expr : BARRA_VERTICAL Expr_simples MENOS_MAIOR Expr_simples . Match_expr 
+
+	END	shift 113
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+	BARRA_VERTICAL	shift 112
+
+	Match_expr	goto 140
+
+	.	error
+
+
+state 137:
+
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+	Match_expr : BARRA_VERTICAL UNDERLINE MENOS_MAIOR Expr_simples . Match_expr 
+
+	END	shift 113
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+	BARRA_VERTICAL	shift 112
+
+	Match_expr	goto 141
+
+	.	error
+
+
+state 138:
+
+	Decl : FUN Id Args IGUAL Expr_simples PONTO_VIRGULA Prog .  (reduce by rule 4)
+
+
+
+	.	reduce by rule 4
+
+
+state 139:
+
+	Decl : FUN REC Id Args DOIS_PONTOS Type IGUAL . Expr_simples PONTO_VIRGULA Prog 
+
+	NUM	shift 26
+	ID	shift 25
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Expr_simples	goto 142
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 140:
+
+	Match_expr : BARRA_VERTICAL Expr_simples MENOS_MAIOR Expr_simples Match_expr .  (reduce by rule 60)
+
+
+
+	.	reduce by rule 60
+
+
+state 141:
+
+	Match_expr : BARRA_VERTICAL UNDERLINE MENOS_MAIOR Expr_simples Match_expr .  (reduce by rule 61)
+
+
+
+	.	reduce by rule 61
+
+
+state 142:
+
+	Decl : FUN REC Id Args DOIS_PONTOS Type IGUAL Expr_simples . PONTO_VIRGULA Prog 
+	Expr_simples : Expr_simples . DUPLO_E_COMERCIAL Expr_simples 
+	Expr_simples : Expr_simples . MAIS Expr_simples 
+	Expr_simples : Expr_simples . MENOS Expr_simples 
+	Expr_simples : Expr_simples . VEZES Expr_simples 
+	Expr_simples : Expr_simples . DIVIDIDO Expr_simples 
+	Expr_simples : Expr_simples . IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DIFERENTE Expr_simples 
+	Expr_simples : Expr_simples . MENOR Expr_simples 
+	Expr_simples : Expr_simples . MENOR_IGUAL Expr_simples 
+	Expr_simples : Expr_simples . DUPLO_DOIS_PONTOS Expr_simples 
+	Expr_simples : Expr_simples . ABRE_COLCHETE Num FECHA_COLCHETE 
+
+	PONTO_VIRGULA	shift 143
+	IGUAL	shift 39
+	DIFERENTE	shift 38
+	DUPLO_DOIS_PONTOS	shift 37
+	MENOS	shift 36
+	DUPLO_E_COMERCIAL	shift 35
+	MAIS	shift 34
+	VEZES	shift 33
+	DIVIDIDO	shift 32
+	MENOR	shift 31
+	MENOR_IGUAL	shift 30
+	ABRE_COLCHETE	shift 29
+
+
+	.	error
+
+
+state 143:
+
+	Decl : FUN REC Id Args DOIS_PONTOS Type IGUAL Expr_simples PONTO_VIRGULA . Prog 
+
+	NUM	shift 26
+	ID	shift 25
+	VAR	shift 24
+	FUN	shift 23
+	IF	shift 22
+	MATCH	shift 21
+	HD	shift 20
+	TL	shift 19
+	ISE	shift 18
+	PRINT	shift 17
+	FN	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	EXCLAMACAO	shift 13
+	MENOS	shift 12
+	ABRE_PARENTESES	shift 11
+	ABRE_CHAVE	shift 10
+
+	Prog	goto 144
+	Decl	goto 8
+	Expr_multipla	goto 7
+	Expr_simples	goto 6
+	Atomic_expr	goto 5
+	App_expr	goto 4
+	Const	goto 3
+	Id	goto 2
+	Num	goto 1
+
+	.	error
+
+
+state 144:
+
+	Decl : FUN REC Id Args DOIS_PONTOS Type IGUAL Expr_simples PONTO_VIRGULA Prog .  (reduce by rule 5)
+
+
+
+	.	reduce by rule 5
+
+
+state 145:
+
+
+	EOF	accept
+
+
+	.	error
+
+350 of 1030 action table entries left after compaction
+280 goto table entries

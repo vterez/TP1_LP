@@ -1,0 +1,2 @@
+Skeleton 5
+d2f1d"TextIO"ad"PlcFrontEnd"h3aä¢PlcFELrVals"jh1aä¢Token"gp2ä¢LrParser"ÿ1gp1e"PlcParserLrValsFun"aä¢PlcLexer"jh1aä¢Tokens"gp2ÿÿ1gp1e"PlcLexerFun"ad"PlcParser"jh3aÿ<gp1ÿ<aä¢ParserData"gp2ÿÿ‚,ad"Lex"gp1ÿ"gp1e"Join"

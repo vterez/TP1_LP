@@ -1,0 +1,2 @@
+Skeleton 5
+ae"PlcLexerFun"i2aä¢Tokens"gp1c"PlcParser_TOKENS"f3d"Char"ä¢Vector"ä¢TextIO"h3aä¢yyInput"jh3aä¢TIO"gp1ÿad"TSIO"gp2ÿd"StreamIO"ad"TPIO"gp1d"TextPrimIO"h0aä¢UserDeclarations"h2egp1ÿf4ä¢Int"ÿd"String"ÿbbd2egp1ÿ‚f7d"List"ÿ:Cd"IO"ÿ‚ÿ‚:ÿÿNf0f1ÿ
